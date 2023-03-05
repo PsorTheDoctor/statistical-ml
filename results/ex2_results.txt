@@ -1,0 +1,116 @@
+Neighbors: 1
+Accuracy: 90.5
+Accuracy: 91.0
+Accuracy: 89.5
+Accuracy: 89.5
+Accuracy: 92.5
+Accuracy: 90.5
+Accuracy: 92.5
+Accuracy: 91.0
+Accuracy: 94.0
+Accuracy: 94.5
+Mean accuracy: 91.55
+
+Neighbors: 2
+Accuracy: 89.0
+Accuracy: 87.5
+Accuracy: 82.0
+Accuracy: 89.0
+Accuracy: 91.0
+Accuracy: 84.0
+Accuracy: 85.0
+Accuracy: 88.5
+Accuracy: 83.5
+Accuracy: 83.0
+Mean accuracy: 86.25
+
+Neighbors: 3
+Accuracy: 90.0
+Accuracy: 88.5
+Accuracy: 90.5
+Accuracy: 88.5
+Accuracy: 87.5
+Accuracy: 88.5
+Accuracy: 89.0
+Accuracy: 90.5
+Accuracy: 89.5
+Accuracy: 89.0
+Mean accuracy: 89.15
+
+Neighbors: 4
+Accuracy: 85.5
+Accuracy: 89.5
+Accuracy: 89.0
+Accuracy: 89.0
+Accuracy: 88.0
+Accuracy: 85.5
+Accuracy: 91.0
+Accuracy: 87.0
+Accuracy: 88.0
+Accuracy: 88.5
+Mean accuracy: 88.1
+
+Neighbors: 5
+Accuracy: 87.5
+Accuracy: 88.0
+Accuracy: 86.5
+Accuracy: 88.0
+Accuracy: 88.0
+Accuracy: 91.5
+Accuracy: 88.5
+Accuracy: 86.0
+Accuracy: 88.0
+Accuracy: 90.5
+Mean accuracy: 88.25
+
+Neighbors: 6
+Accuracy: 86.0
+Accuracy: 91.0
+Accuracy: 89.5
+Accuracy: 87.5
+Accuracy: 87.5
+Accuracy: 86.0
+Accuracy: 85.5
+Accuracy: 88.5
+Accuracy: 89.5
+Accuracy: 87.0
+Mean accuracy: 87.8
+
+Neighbors: 7
+Accuracy: 88.0
+Accuracy: 88.0
+Accuracy: 82.5
+Accuracy: 86.5
+Accuracy: 88.0
+Accuracy: 86.0
+Accuracy: 88.0
+Accuracy: 87.5
+Accuracy: 89.0
+Accuracy: 87.0
+Mean accuracy: 87.05
+
+Neighbors: 8
+Accuracy: 84.5
+Accuracy: 90.0
+Accuracy: 84.0
+Accuracy: 83.5
+Accuracy: 88.0
+Accuracy: 90.0
+Accuracy: 85.5
+Accuracy: 80.0
+Accuracy: 85.0
+Accuracy: 88.0
+Mean accuracy: 85.85
+
+Neighbors: 9
+Accuracy: 85.5
+Accuracy: 88.0
+Accuracy: 88.0
+Accuracy: 88.0
+Accuracy: 89.0
+Accuracy: 85.0
+Accuracy: 86.5
+Accuracy: 87.5
+Accuracy: 85.0
+Accuracy: 85.5
+Mean accuracy: 86.8

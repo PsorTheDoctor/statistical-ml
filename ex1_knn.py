@@ -3,6 +3,7 @@ import numpy as np
 from scipy.stats import mode
 from sklearn.utils import shuffle
 # from sklearn.neighbors import KNeighborsClassifier
+import matplotlib.pyplot as plt
 import time
 from utils.knn import KNN
 
@@ -57,19 +58,36 @@ if __name__ == '__main__':
     X_train /= 255.
     X_test /= 255.
 
-    for k in range(1, 10):
-        start = time.time()
+    train_acc_history = []
+    test_acc_history = []
+    train_time_history = []
+    test_time_history = []
+    k_neighbors = 10
 
+    for k in range(1, k_neighbors + 1):
         # My implemented model
         model = KNN(k_neighbors=k)
+
+        start = time.time()
+        model.fit(X_train, Y_train)
+        Y_pred = model.predict(X_train)
+        end = time.time()
+        t_train = round(end - start, 2)
+
+        start = time.time()
         model.fit(X_train, Y_train)
         Y_pred = model.predict(X_test)
-
         end = time.time()
-        t = round(end - start, 2)
+        t_test = round(end - start, 2)
 
-        my_correct, my_count = validate(Y_test, Y_pred)
-        my_result = (my_correct / my_count) * 100
+        train_correct, train_count = validate(Y_train, Y_pred)
+        test_correct, test_count = validate(Y_test, Y_pred)
+        train_acc = (train_correct / train_count) * 100
+        test_acc = (test_correct / test_count) * 100
+        train_acc_history.append(train_acc)
+        test_acc_history.append(test_acc)
+        train_time_history.append(t_train)
+        test_time_history.append(t_test)
 
         # Built-in sklearn model
         # model = KNeighborsClassifier(n_neighbors=k)
@@ -78,6 +96,24 @@ if __name__ == '__main__':
         # sklearn_correct, sklearn_count = validate(Y_test, Y_pred)
         # sklearn_result = (sklearn_correct / sklearn_count) * 100
 
-        print('Neighbors: {}, accuracy: {}, time: {}'.format(k, my_result, t))
+        print('Neighbors: {}, train acc: {}, time: {}'.format(k, train_acc, t_train))
+        print('Neighbors: {}, test acc: {}, time: {}'.format(k, test_acc, t_test))
         # print('Accuracy on test set by our model:', my_result)
         # print('Accuracy on test set by sklearn model:', sklearn_result)
+
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.xlabel('Number of neighbors')
+    plt.ylabel('Accuracy')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), train_acc_history, label='Train dataset')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), test_acc_history, label='Test dataset')
+    plt.legend()
+    plt.show()
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.xlabel('Number of neighbors')
+    plt.ylabel('Time')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), train_time_history, label='Train dataset')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), test_time_history, label='Test dataset')
+    plt.legend()
+    plt.show()

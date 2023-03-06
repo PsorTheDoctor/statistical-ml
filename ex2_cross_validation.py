@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import mode
 from sklearn.utils import shuffle
 # from sklearn.neighbors import KNeighborsClassifier
-import time
+import matplotlib.pyplot as plt
 from utils.knn import KNN
 
 
@@ -35,7 +35,9 @@ if __name__ == '__main__':
     # 0-1 normalization
     images /= 255.
 
-    for k in range(1, 10):
+    k_neighbors = 10
+
+    for k in range(1, k_neighbors + 1):
         history = []
         print('Neighbors: {}'.format(k))
 
@@ -57,17 +59,23 @@ if __name__ == '__main__':
             my_correct, my_count = validate(Y_test, Y_pred)
             my_result = (my_correct / my_count) * 100
 
-            # Built-in sklearn model
-            # model = KNeighborsClassifier(n_neighbors=3)
-            # model.fit(X_train, Y_train)
-            # Y_pred = model.predict(X_test)
-            # sklearn_correct, sklearn_count = validate(Y_test, Y_pred)
-            # sklearn_result = (sklearn_correct / sklearn_count) * 100
-
             print('Accuracy: {}'.format(my_result))
             history.append(my_result)
             # print('Accuracy on test set by our model:', my_result)
             # print('Accuracy on test set by sklearn model:', sklearn_result)
 
         print('Mean accuracy: {}'.format(np.mean(history)))
+        print('Std accuracy: {}'.format(np.std(history)))
         print()
+
+    without_cross_val = [87.2, 80.4, 83.5, 81.5, 81.6, 79.7, 80.0, 79.9, 80.0, 79.3]
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.xlabel('Number of neighbors')
+    plt.ylabel('Test accuracy')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), without_cross_val,
+             label='Without cross validation')
+    plt.plot(np.arange(1, k_neighbors + 1, 1), history,
+             label='Cross validation')
+    plt.legend()
+    plt.show()

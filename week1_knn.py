@@ -13,7 +13,7 @@ from utils.knn import KNN
 #     img = np.zeros((dim, dim))
 #     for x in range(dim):
 #         for y in range(dim):
-#             img[x, y] = img_data[y*dim - (x-1)]
+#             img[y, x] = img_data[y*dim - (x-1)]
 #
 #     return img
 

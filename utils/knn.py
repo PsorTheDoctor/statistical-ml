@@ -33,8 +33,8 @@ class KNN:
         # test example x and training set X_train.
         distances = np.zeros(self.n_examples)
         for i in range(self.n_examples):
-          d = self.euclidean(x, self.X_train[i])
-          distances[i] = d
+            d = self.euclidean(x, self.X_train[i])
+            distances[i] = d
 
         # Sort Y_train according to euclidean distance
         # and store into Y_train_sorted

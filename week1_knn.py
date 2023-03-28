@@ -1,21 +1,10 @@
-import pyreadr
 import numpy as np
-from scipy.stats import mode
-from sklearn.utils import shuffle
+# from scipy.stats import mode
 # from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 import time
+from utils.load_data import load_all_persons_in_dataset
 from utils.knn import KNN
-
-
-# def get_img(img_data):
-#     dim = 18
-#     img = np.zeros((dim, dim))
-#     for x in range(dim):
-#         for y in range(dim):
-#             img[y, x] = img_data[y*dim - (x-1)]
-#
-#     return img
 
 
 def validate(Y_test, Y_pred):
@@ -29,31 +18,7 @@ def validate(Y_test, Y_pred):
     return correctly_classified, count
 
 
-if __name__ == '__main__':
-    data = pyreadr.read_r('data/data_1.Rdata')
-    ciphers = np.array(data['ciphers'])
-    print('Dataset shape:', ciphers.shape)
-
-    labels = np.array(ciphers[:, 1:2], dtype=np.uint8).flatten()
-    images = ciphers[:, 2:]
-
-    print('Labels shape:', labels.shape)
-    print('Images shape:', images.shape)
-
-    # Shuffling before splitting
-    images, labels = shuffle(images, labels, random_state=42)
-
-    # Splitting data 50-50 into train and test dataset
-    X_train = images[:1000, :]
-    Y_train = labels[:1000]
-    X_test = images[1000:, :]
-    Y_test = labels[1000:]
-
-    print('X_train shape:', X_train.shape)
-    print('Y_train shape:', Y_train.shape)
-    print('X_test shape:', X_test.shape)
-    print('Y_test shape:', Y_test.shape)
-
+def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
     # 0-1 normalization
     X_train /= 255.
     X_test /= 255.
@@ -62,7 +27,7 @@ if __name__ == '__main__':
     test_acc_history = []
     train_time_history = []
     test_time_history = []
-    k_neighbors = 10
+    k_neighbors = neighbors_to_test
 
     for k in range(1, k_neighbors + 1):
         # My implemented model
@@ -70,18 +35,18 @@ if __name__ == '__main__':
 
         start = time.time()
         model.fit(X_train, Y_train)
-        Y_pred = model.predict(X_train)
+        Y_pred_on_train = model.predict(X_train)
         end = time.time()
         t_train = round(end - start, 2)
 
         start = time.time()
         model.fit(X_train, Y_train)
-        Y_pred = model.predict(X_test)
+        Y_pred_on_test = model.predict(X_test)
         end = time.time()
         t_test = round(end - start, 2)
 
-        train_correct, train_count = validate(Y_train, Y_pred)
-        test_correct, test_count = validate(Y_test, Y_pred)
+        train_correct, train_count = validate(Y_train, Y_pred_on_train)
+        test_correct, test_count = validate(Y_test, Y_pred_on_test)
         train_acc = (train_correct / train_count) * 100
         test_acc = (test_correct / test_count) * 100
         train_acc_history.append(train_acc)
@@ -101,8 +66,8 @@ if __name__ == '__main__':
         # print('Accuracy on test set by our model:', my_result)
         # print('Accuracy on test set by sklearn model:', sklearn_result)
 
-
     fig = plt.figure(figsize=(8, 6))
+    plt.title(title)
     plt.xlabel('Number of neighbors')
     plt.ylabel('Accuracy')
     plt.plot(np.arange(1, k_neighbors + 1, 1), train_acc_history, label='Train dataset')
@@ -111,9 +76,17 @@ if __name__ == '__main__':
     plt.show()
 
     fig = plt.figure(figsize=(8, 6))
+    plt.title(title)
     plt.xlabel('Number of neighbors')
     plt.ylabel('Time')
     plt.plot(np.arange(1, k_neighbors + 1, 1), train_time_history, label='Train dataset')
     plt.plot(np.arange(1, k_neighbors + 1, 1), test_time_history, label='Test dataset')
     plt.legend()
     plt.show()
+
+
+if __name__ == '__main__':
+    X_train, y_train, X_test, y_test = load_all_persons_in_dataset(
+         n_persons=1, split_ratio=0.5, verbose=True
+    )
+    test_knn(X_train, y_train, X_test, y_test)

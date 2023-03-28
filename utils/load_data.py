@@ -3,10 +3,10 @@ import numpy as np
 
 
 def load_unsplitted_data(n_persons=10):
-    if n_persons in [1, 4, 10]:
-        data = pyreadr.read_r('../data/data_{}.Rdata'.format(n_persons))
+    if n_persons in [1, 4, 10, 12]:
+        data = pyreadr.read_r('data/data_{}.Rdata'.format(n_persons))
     else:
-        print('n_persons should be 1, 4, or 10.')
+        print('n_persons should be 1, 4, 10, or 12.')
 
     ciphers = np.array(data['ciphers'])
     people = np.array(ciphers[:, 0:1], dtype=np.uint8).flatten()

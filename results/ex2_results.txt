@@ -1,139 +1,159 @@
 Neighbors: 1
-Accuracy: 90.5
-Accuracy: 91.0
-Accuracy: 89.5
-Accuracy: 89.5
-Accuracy: 92.5
-Accuracy: 90.5
-Accuracy: 92.5
-Accuracy: 91.0
-Accuracy: 94.0
-Accuracy: 94.5
-Mean accuracy: 91.55
-Std accuracy: 1.6650825805346712
+Train acc: 100.0, test acc: 91.0
+Train acc: 100.0, test acc: 90.5
+Train acc: 100.0, test acc: 91.0
+Train acc: 100.0, test acc: 89.5
+Train acc: 100.0, test acc: 89.5
+Train acc: 100.0, test acc: 92.5
+Train acc: 100.0, test acc: 90.5
+Train acc: 100.0, test acc: 92.5
+Train acc: 100.0, test acc: 91.0
+Train acc: 100.0, test acc: 94.0
+Mean train accuracy: 100.0
+Mean test accuracy: 91.2
+Std train accuracy: 0.0
+Std test accuracy: 1.345362404707371
 
 Neighbors: 2
-Accuracy: 89.0
-Accuracy: 87.5
-Accuracy: 82.0
-Accuracy: 89.0
-Accuracy: 91.0
-Accuracy: 84.0
-Accuracy: 85.0
-Accuracy: 88.5
-Accuracy: 83.5
-Accuracy: 83.0
-Mean accuracy: 86.25
-Std accuracy: 2.9516944286290885
+Train acc: 94.83333333333334, test acc: 84.5
+Train acc: 94.61111111111111, test acc: 89.0
+Train acc: 95.0, test acc: 87.5
+Train acc: 95.11111111111111, test acc: 82.0
+Train acc: 94.5, test acc: 89.0
+Train acc: 95.27777777777777, test acc: 91.0
+Train acc: 94.88888888888889, test acc: 84.0
+Train acc: 94.55555555555556, test acc: 85.0
+Train acc: 94.94444444444444, test acc: 88.5
+Train acc: 94.55555555555556, test acc: 83.5
+Mean train accuracy: 94.82777777777778
+Mean test accuracy: 86.4
+Std train accuracy: 0.2514771177279157
+Std test accuracy: 2.817800560721074
 
 Neighbors: 3
-Accuracy: 90.0
-Accuracy: 88.5
-Accuracy: 90.5
-Accuracy: 88.5
-Accuracy: 87.5
-Accuracy: 88.5
-Accuracy: 89.0
-Accuracy: 90.5
-Accuracy: 89.5
-Accuracy: 89.0
-Mean accuracy: 89.15
-Std accuracy: 0.9233092656309693
+Train acc: 95.38888888888889, test acc: 86.5
+Train acc: 95.44444444444444, test acc: 90.0
+Train acc: 95.55555555555556, test acc: 88.5
+Train acc: 95.77777777777777, test acc: 90.5
+Train acc: 95.61111111111111, test acc: 88.5
+Train acc: 96.0, test acc: 87.5
+Train acc: 95.44444444444444, test acc: 88.5
+Train acc: 95.61111111111111, test acc: 89.0
+Train acc: 95.27777777777777, test acc: 90.5
+Train acc: 95.83333333333334, test acc: 89.5
+Mean train accuracy: 95.59444444444445
+Mean test accuracy: 88.9
+Std train accuracy: 0.2108916988455832
+Std test accuracy: 1.2206555615733703
 
 Neighbors: 4
-Accuracy: 85.5
-Accuracy: 89.5
-Accuracy: 89.0
-Accuracy: 89.0
-Accuracy: 88.0
-Accuracy: 85.5
-Accuracy: 91.0
-Accuracy: 87.0
-Accuracy: 88.0
-Accuracy: 88.5
-Mean accuracy: 88.1
-Std accuracy: 1.6401219466856725
+Train acc: 94.0, test acc: 89.5
+Train acc: 93.11111111111111, test acc: 85.5
+Train acc: 93.44444444444444, test acc: 89.5
+Train acc: 93.61111111111111, test acc: 89.0
+Train acc: 93.66666666666667, test acc: 89.0
+Train acc: 93.61111111111111, test acc: 88.0
+Train acc: 93.61111111111111, test acc: 85.5
+Train acc: 93.55555555555556, test acc: 91.0
+Train acc: 93.44444444444444, test acc: 87.0
+Train acc: 93.61111111111111, test acc: 88.0
+Mean train accuracy: 93.56666666666666
+Mean test accuracy: 88.2
+Std train accuracy: 0.2105255035721824
+Std test accuracy: 1.6911534525287764
 
 Neighbors: 5
-Accuracy: 87.5
-Accuracy: 88.0
-Accuracy: 86.5
-Accuracy: 88.0
-Accuracy: 88.0
-Accuracy: 91.5
-Accuracy: 88.5
-Accuracy: 86.0
-Accuracy: 88.0
-Accuracy: 90.5
-Mean accuracy: 88.25
-Std accuracy: 1.5692354826475214
+Train acc: 94.27777777777779, test acc: 91.5
+Train acc: 93.77777777777779, test acc: 87.5
+Train acc: 93.22222222222221, test acc: 88.0
+Train acc: 94.05555555555556, test acc: 86.5
+Train acc: 94.11111111111111, test acc: 88.0
+Train acc: 94.11111111111111, test acc: 88.0
+Train acc: 93.88888888888889, test acc: 91.5
+Train acc: 93.77777777777779, test acc: 88.5
+Train acc: 94.11111111111111, test acc: 86.0
+Train acc: 93.5, test acc: 88.0
+Mean train accuracy: 93.88333333333334
+Mean test accuracy: 88.35
+Std train accuracy: 0.30776975521032607
+Std test accuracy: 1.7327723451163455
 
 Neighbors: 6
-Accuracy: 86.0
-Accuracy: 91.0
-Accuracy: 89.5
-Accuracy: 87.5
-Accuracy: 87.5
-Accuracy: 86.0
-Accuracy: 85.5
-Accuracy: 88.5
-Accuracy: 89.5
-Accuracy: 87.0
-Mean accuracy: 87.8
-Std accuracy: 1.705872210923198
+Train acc: 92.72222222222221, test acc: 90.5
+Train acc: 91.77777777777779, test acc: 86.0
+Train acc: 92.77777777777779, test acc: 91.0
+Train acc: 92.66666666666666, test acc: 89.5
+Train acc: 92.05555555555556, test acc: 87.5
+Train acc: 92.22222222222223, test acc: 87.5
+Train acc: 92.16666666666666, test acc: 86.0
+Train acc: 91.66666666666666, test acc: 85.5
+Train acc: 92.44444444444444, test acc: 88.5
+Train acc: 92.05555555555556, test acc: 89.5
+Mean train accuracy: 92.25555555555556
+Mean test accuracy: 88.15
+Std train accuracy: 0.3686813338452674
+Std test accuracy: 1.8580904176062045
 
 Neighbors: 7
-Accuracy: 88.0
-Accuracy: 88.0
-Accuracy: 82.5
-Accuracy: 86.5
-Accuracy: 88.0
-Accuracy: 86.0
-Accuracy: 88.0
-Accuracy: 87.5
-Accuracy: 89.0
-Accuracy: 87.0
-Mean accuracy: 87.05
-Std accuracy: 1.724093964956667
+Train acc: 91.88888888888889, test acc: 87.0
+Train acc: 92.22222222222223, test acc: 88.0
+Train acc: 92.77777777777779, test acc: 88.0
+Train acc: 92.38888888888889, test acc: 82.5
+Train acc: 91.94444444444444, test acc: 86.5
+Train acc: 92.33333333333333, test acc: 88.0
+Train acc: 92.38888888888889, test acc: 86.0
+Train acc: 92.0, test acc: 88.0
+Train acc: 92.22222222222223, test acc: 87.5
+Train acc: 91.83333333333333, test acc: 89.0
+Mean train accuracy: 92.20000000000002
+Mean test accuracy: 87.05
+Std train accuracy: 0.27577052546646574
+Std test accuracy: 1.724093964956667
 
 Neighbors: 8
-Accuracy: 84.5
-Accuracy: 90.0
-Accuracy: 84.0
-Accuracy: 83.5
-Accuracy: 88.0
-Accuracy: 90.0
-Accuracy: 85.5
-Accuracy: 80.0
-Accuracy: 85.0
-Accuracy: 88.0
-Mean accuracy: 85.85
-Std accuracy: 2.992072860075436
+Train acc: 91.0, test acc: 87.0
+Train acc: 91.5, test acc: 84.5
+Train acc: 90.94444444444446, test acc: 90.0
+Train acc: 91.38888888888889, test acc: 84.0
+Train acc: 91.11111111111111, test acc: 83.5
+Train acc: 90.61111111111111, test acc: 88.0
+Train acc: 90.94444444444446, test acc: 90.0
+Train acc: 91.11111111111111, test acc: 85.5
+Train acc: 90.72222222222223, test acc: 80.0
+Train acc: 91.38888888888889, test acc: 85.0
+Mean train accuracy: 91.07222222222224
+Mean test accuracy: 85.75
+Std train accuracy: 0.2756025945513849
+Std test accuracy: 2.934706118165838
 
 Neighbors: 9
-Accuracy: 85.5
-Accuracy: 88.0
-Accuracy: 88.0
-Accuracy: 88.0
-Accuracy: 89.0
-Accuracy: 85.0
-Accuracy: 86.5
-Accuracy: 87.5
-Accuracy: 85.0
-Accuracy: 85.5
-Mean accuracy: 86.8
-Std accuracy: 1.4
+Train acc: 90.66666666666666, test acc: 88.5
+Train acc: 90.88888888888889, test acc: 85.5
+Train acc: 90.11111111111111, test acc: 88.0
+Train acc: 90.27777777777779, test acc: 88.0
+Train acc: 90.72222222222223, test acc: 88.0
+Train acc: 90.72222222222223, test acc: 89.0
+Train acc: 91.11111111111111, test acc: 85.0
+Train acc: 91.38888888888889, test acc: 86.5
+Train acc: 91.22222222222223, test acc: 87.5
+Train acc: 91.38888888888889, test acc: 85.0
+Mean train accuracy: 90.85
+Mean test accuracy: 87.1
+Std train accuracy: 0.4157768276015018
+Std test accuracy: 1.4106735979665883
 
 Neighbors: 10
-Accuracy: 85.5
-Accuracy: 84.5
-Accuracy: 80.5
-Accuracy: 85.5
-Accuracy: 87.0
-Accuracy: 87.5
-Accuracy: 83.0
-Accuracy: 89.0
-Accuracy: 83.5
-Accuracy: 83.0
-Mean accuracy: 84.9
-Std accuracy: 2.3958297101421877
+Train acc: 89.77777777777777, test acc: 85.5
+Train acc: 89.5, test acc: 85.5
+Train acc: 90.16666666666666, test acc: 84.5
+Train acc: 89.72222222222223, test acc: 80.5
+Train acc: 89.88888888888889, test acc: 85.5
+Train acc: 89.33333333333333, test acc: 87.0
+Train acc: 89.44444444444444, test acc: 87.5
+Train acc: 89.94444444444444, test acc: 83.0
+Train acc: 88.88888888888889, test acc: 89.0
+Train acc: 89.77777777777777, test acc: 83.5
+Mean train accuracy: 89.64444444444443
+Mean test accuracy: 85.15
+Std train accuracy: 0.34533933928711136
+Std test accuracy: 2.313547060251855

@@ -48,11 +48,8 @@ if __name__ == '__main__':
             Y_test = labels[int((1 - test_size) * n):]
 
             model = KNN(k_neighbors=k)
-
             model.fit(X_train, Y_train)
             Y_pred_on_train = model.predict(X_train)
-
-            model.fit(X_test, Y_train)
             Y_pred_on_test = model.predict(X_test)
 
             train_correct, train_count = validate(Y_train, Y_pred_on_train)
@@ -61,15 +58,14 @@ if __name__ == '__main__':
             test_acc = (test_correct / test_count) * 100
 
             train_history.append(train_acc)
-            train_history.append(train_history)
+            test_history.append(test_acc)
 
-            print('Train accuracy: {}'.format(train_acc))
-            print('Test accuracy: {}'.format(test_acc))
+            print('Train acc: {}, test acc: {}'.format(train_acc, test_acc))
 
         train_std = np.std(train_history)
         test_std = np.std(test_history)
-        train_std_history.append(train_acc)
-        train_std_history.append(train_history)
+        train_std_history.append(train_std)
+        train_std_history.append(test_std)
 
         print('Mean train accuracy: {}'.format(np.mean(train_history)))
         print('Mean test accuracy: {}'.format(np.mean(test_history)))
@@ -77,8 +73,8 @@ if __name__ == '__main__':
         print('Std test accuracy: {}'.format(test_std))
         print()
 
-    train_no_cross_val = []
-    test_no_cross_val = [87.2, 80.4, 83.5, 81.5, 81.6, 79.7, 80.0, 79.9, 80.0, 79.3]
+    train_no_cross_val = [100.0, 91.4, 92.7, 90.8, 90.0, 89.0, 88.9, 87.1, 86.8, 85.0] #, 84.6, 83.2, 83.2, 82.0, 80.9]
+    test_no_cross_val = [87.2, 80.4, 83.5, 81.5, 81.6, 79.7, 80.0, 79.9, 80.0, 79.3] #, 78.6, 77.5, 76.7, 75.9, 76.4]
 
     fig = plt.figure(figsize=(8, 6))
     plt.xlabel('Number of neighbors')
@@ -99,7 +95,7 @@ if __name__ == '__main__':
              label='Cross validation')
     plt.legend()
     plt.show()
-
+    """
     # Ex. 4
     # Case 1: All-persons-in dataset
     X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=10)
@@ -145,3 +141,4 @@ if __name__ == '__main__':
     plt.ylabel('Computation time')
     plt.bar()
     plt.show()
+    """

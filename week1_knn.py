@@ -32,15 +32,14 @@ def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
     for k in range(1, k_neighbors + 1):
         # My implemented model
         model = KNN(k_neighbors=k)
+        model.fit(X_train, Y_train)
 
         start = time.time()
-        model.fit(X_train, Y_train)
         Y_pred_on_train = model.predict(X_train)
         end = time.time()
         t_train = round(end - start, 2)
 
         start = time.time()
-        model.fit(X_train, Y_train)
         Y_pred_on_test = model.predict(X_test)
         end = time.time()
         t_test = round(end - start, 2)
@@ -87,6 +86,6 @@ def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
 
 if __name__ == '__main__':
     X_train, y_train, X_test, y_test = load_all_persons_in_dataset(
-         n_persons=1, split_ratio=0.5, verbose=True
+         n_persons=1, split_ratio=0.5, shuffle=True, verbose=True
     )
     test_knn(X_train, y_train, X_test, y_test)

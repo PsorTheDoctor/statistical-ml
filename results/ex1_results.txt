@@ -1,9 +1,40 @@
-Neighbors: 1, accuracy: 87.2, time: 13.25
-Neighbors: 2, accuracy: 80.4, time: 13.0
-Neighbors: 3, accuracy: 83.5, time: 12.7
-Neighbors: 4, accuracy: 81.5, time: 12.47
-Neighbors: 5, accuracy: 81.6, time: 12.76
-Neighbors: 6, accuracy: 79.7, time: 12.79
-Neighbors: 7, accuracy: 80.0, time: 13.46
-Neighbors: 8, accuracy: 79.9, time: 14.14
-Neighbors: 9, accuracy: 80.0, time: 14.64
+Neighbors: 1, train acc: 100.0, time: 13.88
+Neighbors: 1, test acc: 87.2, time: 12.91
+Neighbors: 2, train acc: 91.4, time: 12.65
+Neighbors: 2, test acc: 80.4, time: 12.1
+Neighbors: 3, train acc: 92.7, time: 12.11
+Neighbors: 3, test acc: 83.5, time: 13.87
+Neighbors: 4, train acc: 90.8, time: 12.76
+Neighbors: 4, test acc: 81.5, time: 12.48
+Neighbors: 5, train acc: 90.0, time: 12.24
+Neighbors: 5, test acc: 81.6, time: 12.25
+Neighbors: 6, train acc: 89.0, time: 13.91
+Neighbors: 6, test acc: 79.7, time: 12.45
+Neighbors: 7, train acc: 88.9, time: 12.9
+Neighbors: 7, test acc: 80.0, time: 12.62
+Neighbors: 8, train acc: 87.1, time: 12.19
+Neighbors: 8, test acc: 79.9, time: 13.24
+Neighbors: 9, train acc: 86.8, time: 13.18
+Neighbors: 9, test acc: 80.0, time: 12.51
+Neighbors: 10, train acc: 85.0, time: 13.58
+Neighbors: 10, test acc: 79.3, time: 13.17
+Neighbors: 11, train acc: 84.6, time: 13.2
+Neighbors: 11, test acc: 78.60000000000001, time: 13.22
+Neighbors: 12, train acc: 83.2, time: 12.72
+Neighbors: 12, test acc: 77.5, time: 13.06
+Neighbors: 13, train acc: 83.2, time: 12.3
+Neighbors: 13, test acc: 76.7, time: 13.22
+Neighbors: 14, train acc: 82.0, time: 13.06
+Neighbors: 14, test acc: 75.9, time: 12.4
+Neighbors: 15, train acc: 80.9, time: 12.72
+Neighbors: 15, test acc: 76.4, time: 12.17
+Neighbors: 16, train acc: 80.80000000000001, time: 12.8
+Neighbors: 16, test acc: 75.6, time: 13.78
+Neighbors: 17, train acc: 79.7, time: 12.5
+Neighbors: 17, test acc: 74.8, time: 12.24
+Neighbors: 18, train acc: 78.60000000000001, time: 14.28
+Neighbors: 18, test acc: 73.9, time: 13.44
+Neighbors: 19, train acc: 77.4, time: 13.17
+Neighbors: 19, test acc: 73.9, time: 12.53
+Neighbors: 20, train acc: 77.4, time: 12.69
+Neighbors: 20, test acc: 72.7, time: 12.5

@@ -1,8 +1,9 @@
 import pyreadr
 import numpy as np
+from sklearn import utils
 
 
-def load_unsplitted_data(n_persons=10):
+def load_unsplitted_data(n_persons=10, shuffle=False):
     if n_persons in [1, 4, 10, 12]:
         data = pyreadr.read_r('data/data_{}.Rdata'.format(n_persons))
     else:
@@ -12,11 +13,14 @@ def load_unsplitted_data(n_persons=10):
     people = np.array(ciphers[:, 0:1], dtype=np.uint8).flatten()
     labels = np.array(ciphers[:, 1:2], dtype=np.uint8).flatten()
     images = ciphers[:, 2:]
+    if shuffle:
+        images, labels = utils.shuffle(images, labels, random_state=42)
+
     return people, labels, images
 
 
-def load_all_persons_in_dataset(n_persons=10, split_ratio=0.8, verbose=False):
-    _, labels, images = load_unsplitted_data(n_persons)
+def load_all_persons_in_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
+    _, labels, images = load_unsplitted_data(n_persons, shuffle=shuffle)
     n = images.shape[0]
 
     X_train = images[:int(n * split_ratio), :]
@@ -33,8 +37,8 @@ def load_all_persons_in_dataset(n_persons=10, split_ratio=0.8, verbose=False):
     return X_train, y_train, X_test, y_test
 
 
-def load_disjunct_dataset(n_persons=10, split_ratio=0.8, verbose=False):
-    people, labels, images = load_unsplitted_data(n_persons)
+def load_disjunct_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
+    people, labels, images = load_unsplitted_data(n_persons, shuffle=shuffle)
 
     X_train = []
     y_train = []

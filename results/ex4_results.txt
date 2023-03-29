@@ -1,0 +1,43 @@
+All-persons-in dataset
+Neighbors: 1, train acc: 100.0, time: 619.28
+Neighbors: 1, test acc: 37.875, time: 153.37
+Neighbors: 2, train acc: 91.671875, time: 625.98
+Neighbors: 2, test acc: 32.8125, time: 161.27
+Neighbors: 3, train acc: 91.3125, time: 13315.58
+Neighbors: 3, test acc: 34.375, time: 171.43
+Neighbors: 4, train acc: 89.625, time: 761.84
+Neighbors: 4, test acc: 34.125, time: 206.0
+Neighbors: 5, train acc: 88.90625, time: 869.75
+Neighbors: 5, test acc: 34.0, time: 239.8
+Neighbors: 6, train acc: 87.390625, time: 867.14
+Neighbors: 6, test acc: 32.9375, time: 240.38
+Neighbors: 7, train acc: 86.609375, time: 899.2
+Neighbors: 7, test acc: 34.8125, time: 166.71
+Neighbors: 8, train acc: 85.71875, time: 668.08
+Neighbors: 8, test acc: 33.75, time: 170.28
+Neighbors: 9, train acc: 85.46875, time: 779.5
+Neighbors: 9, test acc: 33.0, time: 179.21
+Neighbors: 10, train acc: 84.5625, time: 657.44
+Neighbors: 10, test acc: 33.0625, time: 165.34
+
+Disjunct dataset
+Neighbors: 1, train acc: 100.0, time: 227.7
+Neighbors: 1, test acc: 55.800000000000004, time: 225.37
+Neighbors: 2, train acc: 89.3, time: 226.01
+Neighbors: 2, test acc: 53.900000000000006, time: 221.7
+Neighbors: 3, train acc: 88.9, time: 227.01
+Neighbors: 3, test acc: 54.85, time: 221.59
+Neighbors: 4, train acc: 86.7, time: 222.4
+Neighbors: 4, test acc: 55.05, time: 225.48
+Neighbors: 5, train acc: 85.65, time: 251.05
+Neighbors: 5, test acc: 55.15, time: 293.19
+Neighbors: 6, train acc: 83.89999999999999, time: 284.1
+Neighbors: 6, test acc: 54.125, time: 308.76
+Neighbors: 7, train acc: 82.8, time: 335.47
+Neighbors: 7, test acc: 54.825, time: 268.76
+Neighbors: 8, train acc: 81.69999999999999, time: 264.66
+Neighbors: 8, test acc: 54.1, time: 246.34
+Neighbors: 9, train acc: 81.27499999999999, time: 244.65
+Neighbors: 9, test acc: 53.77499999999999, time: 240.87
+Neighbors: 10, train acc: 79.825, time: 257.34
+Neighbors: 10, test acc: 54.025, time: 254.0

@@ -69,8 +69,10 @@ def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
     plt.title(title)
     plt.xlabel('Number of neighbors')
     plt.ylabel('Accuracy')
-    plt.plot(np.arange(1, k_neighbors + 1, 1), train_acc_history, label='Train dataset')
-    plt.plot(np.arange(1, k_neighbors + 1, 1), test_acc_history, label='Test dataset')
+    plt.bar(np.arange(1, k_neighbors + 1, 1), train_acc_history,
+            color='seagreen', label='Train dataset')
+    plt.bar(np.arange(1, k_neighbors + 1, 1), test_acc_history,
+            bottom=np.zeros(k_neighbors), color='mediumseagreen', label='Test dataset')
     plt.legend()
     plt.show()
 

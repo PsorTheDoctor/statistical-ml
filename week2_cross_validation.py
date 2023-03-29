@@ -95,18 +95,18 @@ if __name__ == '__main__':
              label='Cross validation')
     plt.legend()
     plt.show()
-    """
+
     # Ex. 4
     # Case 1: All-persons-in dataset
-    X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=10)
+    X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=4)
     test_knn (X_train, y_train, X_test, y_test,
-        neighbors_to_test=15,
+        neighbors_to_test=10,
         title='All-persons-in dataset'
     )
     # Case 2: Disjunct dataset
-    X_train, y_train, X_test, y_test = load_disjunct_dataset(n_persons=10)
+    X_train, y_train, X_test, y_test = load_disjunct_dataset(n_persons=4)
     test_knn (X_train, y_train, X_test, y_test,
-        neighbors_to_test=15,
+        neighbors_to_test=10,
         title='Disjunct dataset'
     )
 
@@ -121,6 +121,8 @@ if __name__ == '__main__':
         pred_times = []
 
         for k in k_neighbours_to_test:
+            model = KNN(k_neighbors=k)
+            
             start = time.time()
             model.fit(X_train, y_train)
             end_fit = time.time()
@@ -141,4 +143,3 @@ if __name__ == '__main__':
     plt.ylabel('Computation time')
     plt.bar()
     plt.show()
-    """

@@ -7,18 +7,7 @@ import time
 
 from utils.load_data import *
 from utils.knn import KNN
-from week1_knn import test_knn
-
-
-def validate(Y_test, Y_pred):
-    correctly_classified = 0
-    count = 0
-    for count in range(np.size(Y_pred)):
-        if Y_test[count] == Y_pred[count]:
-            correctly_classified += 1
-        count += 1
-
-    return correctly_classified, count
+from week1_knn import test_knn, validate
 
 
 if __name__ == '__main__':
@@ -137,9 +126,36 @@ if __name__ == '__main__':
             print('Persons: {}, neighbors: {}, fit time: {}'.format(p, k, fit_time))
             print('Persons: {}, neighbors: {}, pred time: {}'.format(p, k, pred_time))
 
+    computation_time = [
+        np.mean([10.67, 9.21, 10.35]),
+        np.mean([164.83, 170.91, 155.93]),
+        np.mean([1003.39, 1028.85, 1031.13])
+    ]
+
     fig = plt.figure(figsize=(8, 6))
     plt.title('Performance of sample size')
     plt.xlabel('Number of persons')
     plt.ylabel('Computation time')
-    plt.bar()
+    plt.bar(['1', '4', '10'], computation_time)
+    plt.show()
+
+    # Heat map
+    heat_map = np.array([[10.67, 9.21, 10.35],
+                         [164.83, 170.91, 155.93],
+                         [1003.39, 1028.85, 1031.13]])
+
+    persons = ['1 person', '4 persons', '10 persons']
+    neighbors = ['3 neighbors', '4 neighbors', '5 neighbors']
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(heat_map)
+    ax.set_xticks(np.arange(3), labels=neighbors)
+    ax.set_yticks(np.arange(3), labels=persons)
+    plt.title('Computation time')
+    plt.setp(ax.get_xticklabels(), rotation=45, ha='right', rotation_mode='anchor')
+    for i in range(3):
+        for j in range(3):
+            text = ax.text(j, i, heat_map[i, j], ha='center', va='center', color='w')
+
+    fig.tight_layout()
     plt.show()

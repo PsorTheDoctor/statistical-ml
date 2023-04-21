@@ -1,12 +1,11 @@
 import numpy as np
-# from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA
 from sklearn.utils import shuffle
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from scipy.ndimage import gaussian_filter
 import matplotlib.pyplot as plt
 import time
 
-from utils.pca import PCA
 from utils.load_data import *
 from utils.knn import KNN
 
@@ -31,7 +30,67 @@ def validate(Y_test, Y_pred):
     return correctly_classified, count
 
 
+def test_pca(images, n_components=20):
+    # 0-1 normalization
+    images /= 255.
+
+    explained_variances = []
+    cumulative_sum = []
+
+    # Covariance matrix
+    cov_mat = np.cov(images)
+
+    # Eigenvalues and eigenvectors
+    eig_vals, eig_vecs = np.linalg.eig(cov_mat)
+    eig_vals = eig_vals[:n_components]
+    eig_vecs = eig_vecs[:n_components]
+    print('Eigenvalues: {}'.format(eig_vals))
+    print('Eigenvectors: {}'.format(eig_vecs))
+
+    # Sorting the vectors according to eigenvalues
+    eig_pairs = [(np.abs(eig_vals[i]), eig_vecs[:, i]) for i in range(len(eig_vals))]
+    eig_pairs = eig_pairs[::-1]
+
+    # Percentage of explained variance
+    total = sum(eig_vals)
+    explained_var_ratio = [i / total for i in sorted(eig_vals, reverse=True)]
+    explained_variances.append(explained_var_ratio)
+    print('Explained variance ratio: {}'.format(explained_var_ratio))
+
+    cumulative_explained_var = np.cumsum(explained_var_ratio)
+    cumulative_sum.append(cumulative_explained_var)
+    print('Cumulative explained variance: {}'.format(cumulative_explained_var))
+
+    return explained_variances, cumulative_sum
+
+
 if __name__ == '__main__':
+    # Ex. 2.1.1
+    n_components = 20
+    images, _, _, _ = load_all_persons_in_dataset(n_persons=4)
+    explained_variances, cumulative_sum = test_pca(images, n_components)
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.title('All-persons-in dataset')
+    plt.bar(np.arange(1, n_components + 1, 1), np.ravel(explained_variances),
+            label='Explained variance ratios')
+    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum),
+             label='Cumulative explained variance', color='red')
+    plt.legend()
+    plt.show()
+
+    images, _, _, _ = load_disjunct_dataset(n_persons=4)
+    explained_variances, cumulative_sum = test_pca(images, n_components)
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.title('Disjunct dataset')
+    plt.bar(np.arange(1, n_components + 1, 1), np.ravel(explained_variances),
+            label='Explained variance ratios')
+    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum),
+             label='Cumulative explained variance', color='red')
+    plt.legend()
+    plt.show()
+
     # Ex. 2.1.3
     X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=1)
 
@@ -39,26 +98,48 @@ if __name__ == '__main__':
     X_train /= 255.
     X_test /= 255.
 
-    for n in range(10, 20):
-        pca = PCA(n_components=n)
-        X_train_pca = pca.fit_transform(X_train)
-        X_test_pca = pca.fit_transform(X_test)
+    time_col = []
+    for var in [0.8, 0.85, 0.9, 0.95]:
+        pca = PCA(n_components=var)
+        X_pca = pca.fit_transform(X_train)
 
-        model = KNN(k_neighbors=3)
-        model.fit(X_train_pca, y_train)
-        start = time.time()
-        Y_pred_on_train = model.predict(X_test_pca)
-        end = time.time()
-        t = round(end - start, 2)
+        time_row = []
+        for k in [3, 4, 5]:
+            model = KNN(k_neighbors=3)
+            model.fit(X_pca, y_train)
+            start = time.time()
+            Y_pred = model.predict(X_pca)
+            end = time.time()
+            t = round(end - start, 2)
+            time_row.append(t)
+            print('Explained var: {}, time: {}'.format(var, t))
 
-        print('Components: {}, time: {}'.format(n, t))
+        time_col.append(time_row)
 
+    computation_time = np.array(time_col)
+    variances = ['0.8', '0.85', '0.9', '0.95']
+    neighbors = ['3 neighbors', '4 neighbors', '5 neighbors']
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(computation_time)
+    ax.set_xticks(np.arange(3), labels=neighbors)
+    ax.set_yticks(np.arange(4), labels=variances)
+    plt.title('Computation time')
+    plt.setp(ax.get_xticklabels(), rotation=45, ha='right', rotation_mode='anchor')
+    for i in range(4):
+        for j in range(3):
+            text = ax.text(j, i, computation_time[i, j], ha='center', va='center', color='w')
+
+    fig.tight_layout()
+    plt.show()
+    
     # Ex. 2.2
     _, labels, flatten_images = load_unsplitted_data(n_persons=1)
 
     # Min-Max normalization
     scaler = MinMaxScaler()
-    images = scaler.fit(flatten_images)
+    scaler.fit(flatten_images)
+    images = scaler.transform(flatten_images)
     print('Min-max normalization')
 
     minmax_history = []
@@ -85,8 +166,9 @@ if __name__ == '__main__':
 
     # Z-standarization
     scaler = StandardScaler()
-    X_norm = scaler.fit(flatten_images)
-    print('Z-standarization')
+    scaler.fit(flatten_images)
+    images = scaler.transform(flatten_images)
+    print('Z standarization')
 
     z_history = []
     test_size = 0.1
@@ -112,11 +194,12 @@ if __name__ == '__main__':
     print()
 
     fig = plt.figure(figsize=(8, 6))
-    plt.xlabel(['min-max', 'z-std'])
+    plt.xlabel(['Min-Max', 'Z'])
     plt.ylabel('Accuracy')
-    plt.bar(np.mean(minmax_history))
-    plt.bar(np.mean(z_history))
-    plt.legend()
+    plt.bar(np.arange(2), [np.mean(minmax_history), np.mean(z_history)])
+    plt.errorbar(np.arange(2), [np.mean(minmax_history), np.mean(z_history)],
+                 yerr=[np.std(minmax_history), np.std(z_history)],
+                 fmt='o', linewidth=2, capsize=50, color='red')
     plt.show()
 
     # Ex. 2.3
@@ -136,11 +219,21 @@ if __name__ == '__main__':
 
     sigma_to_test = [0.5, 0.7, 0.9]
 
+    # Plot blurred
+    plt.figure(figsize=(9, 3))
+    for i, sigma in enumerate(sigma_to_test):
+        plt.subplot(1, 3, i + 1)
+        img = gaussian_filter(images[1000], sigma=sigma)
+        plt.title('Sigma: {}'.format(sigma))
+        plt.imshow(np.fliplr(img.reshape(18, 18)), cmap='gray', interpolation='nearest')
+    plt.show()
+    
     for sigma in sigma_to_test:
         # Gaussian smoothing
         images = gaussian_filter(images, sigma=sigma)
-        # plt.imshow(images[0], cmap='gray')
-        # plt.show()
+        plt.imshow(images[0], cmap='gray')
+        plt.show()
+    
         images = images.reshape((2000, 18 * 18))
 
         # Cross validation
@@ -185,11 +278,26 @@ if __name__ == '__main__':
         print('Std test accuracy: {}'.format(test_std))
         print()
 
+    smoothing_factors = [0.5, 0.7, 0.9]
+
     fig = plt.figure(figsize=(8, 6))
-    plt.title('Accuracy with different smoothing factors')
+    plt.title('Train accuracy with different smoothing factors')
     plt.xlabel('Sigma')
     plt.ylabel('Accuracy')
-    plt.plot(sigma_to_test, train_history, label='Train accuracy')
-    plt.plot(sigma_to_test, test_history, label='Test accuracy')
-    plt.legend()
+    plt.xticks(np.arange(3), labels=smoothing_factors)
+    plt.bar(np.arange(3), [98.11, 92.32, 57.55])
+    plt.errorbar(np.arange(3), [98.11, 92.32, 57.55],
+                 yerr=[0.25, 0.24, 0.67],
+                 fmt='o', linewidth=2, capsize=50, color='red')
+    plt.show()
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.title('Test accuracy with different smoothing factors')
+    plt.xlabel('Sigma')
+    plt.ylabel('Accuracy')
+    plt.xticks(np.arange(3), labels=smoothing_factors)
+    plt.bar(np.arange(3), [94.3, 83.85, 33.5])
+    plt.errorbar(np.arange(3), [94.3, 83.85, 33.5],
+                 yerr=[1.25, 1.43, 4.14],
+                 fmt='o', linewidth=2, capsize=50, color='red')
     plt.show()

@@ -1,0 +1,47 @@
+Sigma (smoothing factor): 0.5
+Train acc: 98.44444444444444, test acc: 93.5
+Train acc: 98.22222222222223, test acc: 91.5
+Train acc: 97.88888888888889, test acc: 96.0
+Train acc: 98.0, test acc: 94.5
+Train acc: 98.11111111111111, test acc: 93.0
+Train acc: 97.88888888888889, test acc: 95.5
+Train acc: 98.27777777777777, test acc: 95.0
+Train acc: 98.27777777777777, test acc: 94.5
+Train acc: 98.0, test acc: 94.5
+Train acc: 98.0, test acc: 95.0
+Mean train accuracy: 98.11111111111111
+Mean test accuracy: 94.3
+Std train accuracy: 0.1774302158074587
+Std test accuracy: 1.2489995996796797
+
+Sigma (smoothing factor): 0.7
+Train acc: 91.88888888888889, test acc: 85.0
+Train acc: 92.33333333333333, test acc: 83.5
+Train acc: 91.88888888888889, test acc: 81.0
+Train acc: 92.61111111111111, test acc: 83.0
+Train acc: 92.38888888888889, test acc: 85.0
+Train acc: 92.44444444444444, test acc: 86.5
+Train acc: 92.22222222222223, test acc: 83.0
+Train acc: 92.55555555555556, test acc: 84.0
+Train acc: 92.44444444444444, test acc: 84.5
+Train acc: 92.44444444444444, test acc: 83.0
+Mean train accuracy: 92.32222222222222
+Mean test accuracy: 83.85
+Std train accuracy: 0.23934065809486793
+Std test accuracy: 1.4326548781894402
+
+Sigma (smoothing factor): 0.9
+Train acc: 58.05555555555556, test acc: 27.500000000000004
+Train acc: 56.44444444444444, test acc: 39.0
+Train acc: 56.99999999999999, test acc: 36.0
+Train acc: 56.94444444444444, test acc: 30.0
+Train acc: 57.55555555555556, test acc: 32.5
+Train acc: 56.94444444444444, test acc: 39.5
+Train acc: 58.44444444444444, test acc: 30.0
+Train acc: 58.27777777777777, test acc: 36.0
+Train acc: 58.333333333333336, test acc: 36.0
+Train acc: 57.55555555555556, test acc: 28.499999999999996
+Mean train accuracy: 57.55555555555556
+Mean test accuracy: 33.5
+Std train accuracy: 0.6675919504799919
+Std test accuracy: 4.141255848169731

@@ -1,8 +1,8 @@
-import pyreadr
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.utils import shuffle
 import matplotlib.pyplot as plt
+from utils.load_data import load_unsplitted_data
 
 
 def get_img(flatten_img):
@@ -25,11 +25,21 @@ def perform_pca(n_components, X, idx=0):
     plt.xticks([])
 
 
+def plot_eig_vecs(img):
+    img = np.array(img)
+    flatten_img = img.reshape(18 * 18)
+    flatten_img /= 255.
+    print(flatten_img.shape)
+
+    cov_mat = np.cov(img)
+    _, eigvecs = np.linalg.eig(cov_mat)
+    eigvecs = eigvecs[:, ::-1]
+
+    plt.imshow(np.float32(eigvecs), cmap='viridis')
+
+
 if __name__ == '__main__':
-    data = pyreadr.read_r('data/data_12.Rdata')
-    ciphers = np.array(data['ciphers'])
-    flatten_images = ciphers[:, 2:]
-    labels = np.array(ciphers[:, 1:2], dtype=np.uint8).flatten()
+    _, labels, flatten_images = load_unsplitted_data(n_persons=1)
 
     images = []
     for flatten_img in flatten_images:
@@ -38,6 +48,13 @@ if __name__ == '__main__':
 
     images = np.asarray(images)
     images, labels = shuffle(images, labels, random_state=42)
+
+    # Plot eigenvectors
+    plt.figure(figsize=(9, 3))
+    for i in range(10):
+        plt.subplot(1, 3, i + 1)
+        plot_eig_vecs(images[i])
+    plt.show()
 
     # Ex. 2.4.1
     # Plot images
@@ -54,7 +71,12 @@ if __name__ == '__main__':
     # Reconstruction
     cov_mat = np.cov(images)
     _, eig_vecs = np.linalg.eig(cov_mat)
-    # plt.imshow(eig_vecs[:10], cmap='gray')
+    eigvecs = eig_vecs[:, ::-1]
+
+    print(eig_vecs.shape)
+
+    # Ex. 2.4.2
+    plt.imshow(np.float32(eig_vecs.shape), cmap='viridis')
 
     # Plot reconstruction
     plt.figure(figsize=(9, 3))

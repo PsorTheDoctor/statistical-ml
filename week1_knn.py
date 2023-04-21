@@ -34,15 +34,21 @@ def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
         model = KNN(k_neighbors=k)
         model.fit(X_train, Y_train)
 
-        start = time.time()
-        Y_pred_on_train = model.predict(X_train)
-        end = time.time()
-        t_train = round(end - start, 2)
+        train_times = []
+        test_times = []
+        for _ in range(1):
+            start = time.time()
+            Y_pred_on_train = model.predict(X_train)
+            end = time.time()
+            train_times.append(round(end - start, 2))
 
-        start = time.time()
-        Y_pred_on_test = model.predict(X_test)
-        end = time.time()
-        t_test = round(end - start, 2)
+            start = time.time()
+            Y_pred_on_test = model.predict(X_test)
+            end = time.time()
+            test_times.append(round(end - start, 2))
+
+        t_train = np.mean(train_times)
+        t_test = np.mean(test_times)
 
         train_correct, train_count = validate(Y_train, Y_pred_on_train)
         test_correct, test_count = validate(Y_test, Y_pred_on_test)
@@ -80,6 +86,7 @@ def test_knn(X_train, Y_train, X_test, Y_test, neighbors_to_test=20, title=''):
     plt.title(title)
     plt.xlabel('Number of neighbors')
     plt.ylabel('Time')
+    plt.ylim(10, 30)
     plt.plot(np.arange(1, k_neighbors + 1, 1), train_time_history, label='Train dataset')
     plt.plot(np.arange(1, k_neighbors + 1, 1), test_time_history, label='Test dataset')
     plt.legend()

@@ -67,5 +67,15 @@ def load_disjunct_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=
     return X_train, y_train, X_test, y_test
 
 
+def cross_validation(images, labels, test_size=0.1):
+    n = len(labels)
+    images, labels = utils.shuffle(images, labels, random_state=42)
+    X_train = images[:int((1 - test_size) * n), :]
+    y_train = labels[:int((1 - test_size) * n)]
+    X_test = images[int((1 - test_size) * n):, :]
+    y_test = labels[int((1 - test_size) * n):]
+    return X_train, y_train, X_test, y_test
+
+
 # load_all_persons_in_dataset(verbose=True)
 # load_disjunct_dataset(verbose=True)

@@ -3,7 +3,6 @@ from sklearn.decomposition import PCA
 from matplotlib import pyplot as plt
 from utils.load_data import *
 
-
 X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=12)
 
 # Ex. 2

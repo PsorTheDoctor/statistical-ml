@@ -66,31 +66,26 @@ def test_pca(images, n_components=20):
 
 if __name__ == '__main__':
     # Ex. 2.1.1
-    n_components = 20
-    images, _, _, _ = load_all_persons_in_dataset(n_persons=4)
-    explained_variances, cumulative_sum = test_pca(images, n_components)
+    n_components = 15
+    images_all_persons, _, _, _ = load_all_persons_in_dataset(n_persons=4)
+    explained_variances1, cumulative_sum1 = test_pca(images_all_persons, n_components)
+
+    images_disjunct, _, _, _ = load_disjunct_dataset(n_persons=4)
+    explained_variances2, cumulative_sum2 = test_pca(images_disjunct, n_components)
 
     fig = plt.figure(figsize=(8, 6))
-    plt.title('All-persons-in dataset')
-    plt.bar(np.arange(1, n_components + 1, 1), np.ravel(explained_variances),
-            label='Explained variance ratios')
-    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum),
-             label='Cumulative explained variance', color='red')
+    plt.title('PCA explained variance')
+    plt.bar(np.arange(1, n_components + 1, 1) - 0.2, np.ravel(explained_variances1), 0.4,
+            label='Explained variance ratios - all-persons-in', color='seagreen')
+    plt.bar(np.arange(1, n_components + 1, 1) + 0.2, np.ravel(explained_variances2), 0.4,
+            label='Explained variance ratios - disjunct', color='mediumseagreen')
+    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum1),
+             label='Cumulative explained variance - all-persons-in', color='red')
+    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum2),
+             label='Cumulative explained variance - disjunct', color='blue')
     plt.legend()
     plt.show()
-
-    images, _, _, _ = load_disjunct_dataset(n_persons=4)
-    explained_variances, cumulative_sum = test_pca(images, n_components)
-
-    fig = plt.figure(figsize=(8, 6))
-    plt.title('Disjunct dataset')
-    plt.bar(np.arange(1, n_components + 1, 1), np.ravel(explained_variances),
-            label='Explained variance ratios')
-    plt.plot(np.arange(1, n_components + 1, 1), np.ravel(cumulative_sum),
-             label='Cumulative explained variance', color='red')
-    plt.legend()
-    plt.show()
-
+    
     # Ex. 2.1.3
     X_train, y_train, X_test, y_test = load_all_persons_in_dataset(n_persons=1)
 
@@ -132,7 +127,7 @@ if __name__ == '__main__':
 
     fig.tight_layout()
     plt.show()
-    
+
     # Ex. 2.2
     _, labels, flatten_images = load_unsplitted_data(n_persons=1)
 
@@ -162,6 +157,7 @@ if __name__ == '__main__':
         print('Test acc: {}'.format(test_acc))
 
     print('Mean accuracy: {}'.format(np.mean(minmax_history)))
+    print('Std accuracy: {}'.format(np.std(minmax_history)))
     print()
 
     # Z-standarization
@@ -191,14 +187,41 @@ if __name__ == '__main__':
         print('Test acc: {}'.format(test_acc))
 
     print('Mean accuracy: {}'.format(np.mean(z_history)))
+    print('Std accuracy: {}'.format(np.std(z_history)))
+    print()
+
+    # No normalization
+    print('No normalization')
+
+    nonorm_history = []
+    test_size = 0.1
+    for _ in range(10):
+        n = 2000
+        images, labels = shuffle(images, labels, random_state=42)
+        X_train = images[:int((1 - test_size) * n), :]
+        Y_train = labels[:int((1 - test_size) * n)]
+        X_test = images[int((1 - test_size) * n):, :]
+        Y_test = labels[int((1 - test_size) * n):]
+
+        model = KNN(k_neighbors=3)
+        model.fit(X_train, Y_train)
+        Y_pred_on_test = model.predict(X_test)
+        test_correct, test_count = validate(Y_test, Y_pred_on_test)
+        test_acc = (test_correct / test_count) * 100
+        nonorm_history.append(test_acc)
+
+        print('Test acc: {}'.format(test_acc))
+
+    print('Mean accuracy: {}'.format(np.mean(nonorm_history)))
+    print('Std accuracy: {}'.format(np.std(nonorm_history)))
     print()
 
     fig = plt.figure(figsize=(8, 6))
-    plt.xlabel(['Min-Max', 'Z'])
+    plt.xlabel(['Min-Max', 'Z-std', 'None'])
     plt.ylabel('Accuracy')
-    plt.bar(np.arange(2), [np.mean(minmax_history), np.mean(z_history)])
-    plt.errorbar(np.arange(2), [np.mean(minmax_history), np.mean(z_history)],
-                 yerr=[np.std(minmax_history), np.std(z_history)],
+    plt.bar(np.arange(3), [np.mean(minmax_history), np.mean(z_history), np.mean(nonorm_history)])
+    plt.errorbar(np.arange(3), [np.mean(minmax_history), np.mean(z_history), np.mean(z_history)],
+                 yerr=[np.std(minmax_history), np.std(z_history), np.std(nonorm_history)],
                  fmt='o', linewidth=2, capsize=50, color='red')
     plt.show()
 
@@ -281,23 +304,18 @@ if __name__ == '__main__':
     smoothing_factors = [0.5, 0.7, 0.9]
 
     fig = plt.figure(figsize=(8, 6))
-    plt.title('Train accuracy with different smoothing factors')
+    plt.title('Accuracy with different smoothing factors')
     plt.xlabel('Sigma')
     plt.ylabel('Accuracy')
     plt.xticks(np.arange(3), labels=smoothing_factors)
-    plt.bar(np.arange(3), [98.11, 92.32, 57.55])
-    plt.errorbar(np.arange(3), [98.11, 92.32, 57.55],
+    plt.bar(np.arange(3) - 0.2, [98.11, 92.32, 57.55], 0.4,
+            color='seagreen', label='Train dataset')
+    plt.bar(np.arange(3) + 0.2, [94.3, 83.85, 33.5], 0.4,
+            color='mediumseagreen', label='Test dataset')
+    plt.errorbar(np.arange(3) - 0.2, [98.11, 92.32, 57.55],
                  yerr=[0.25, 0.24, 0.67],
-                 fmt='o', linewidth=2, capsize=50, color='red')
-    plt.show()
-
-    fig = plt.figure(figsize=(8, 6))
-    plt.title('Test accuracy with different smoothing factors')
-    plt.xlabel('Sigma')
-    plt.ylabel('Accuracy')
-    plt.xticks(np.arange(3), labels=smoothing_factors)
-    plt.bar(np.arange(3), [94.3, 83.85, 33.5])
-    plt.errorbar(np.arange(3), [94.3, 83.85, 33.5],
+                 fmt='o', linewidth=2, capsize=25, color='red')
+    plt.errorbar(np.arange(3) + 0.2, [94.3, 83.85, 33.5],
                  yerr=[1.25, 1.43, 4.14],
-                 fmt='o', linewidth=2, capsize=50, color='red')
+                 fmt='o', linewidth=2, capsize=25, color='red')
     plt.show()

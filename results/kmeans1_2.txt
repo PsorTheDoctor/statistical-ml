@@ -1,0 +1,79 @@
+Neighbors: 1
+Mean accuracy without k-means: 80.75
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.9651
+Mean accuracy with k-means: 57.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0846
+
+Neighbors: 2
+Mean accuracy without k-means: 74.0
+Std accuracy without k-means: 0.0
+Mean time without k-means: 17.0801
+Mean accuracy with k-means: 53.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0552
+
+Neighbors: 3
+Mean accuracy without k-means: 73.75
+Std accuracy without k-means: 0.0
+Mean time without k-means: 17.2346
+Mean accuracy with k-means: 54.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.1189
+
+Neighbors: 4
+Mean accuracy without k-means: 74.5
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.9508
+Mean accuracy with k-means: 59.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0411
+
+Neighbors: 5
+Mean accuracy without k-means: 74.75
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.7502
+Mean accuracy with k-means: 60.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0459
+
+Neighbors: 6
+Mean accuracy without k-means: 73.75
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.7154
+Mean accuracy with k-means: 61.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.1232
+
+Neighbors: 7
+Mean accuracy without k-means: 74.25
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.4827
+Mean accuracy with k-means: 54.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0533
+
+Neighbors: 8
+Mean accuracy without k-means: 73.5
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.9897
+Mean accuracy with k-means: 58.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0505
+
+Neighbors: 9
+Mean accuracy without k-means: 73.0
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.6858
+Mean accuracy with k-means: 58.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0505
+
+Neighbors: 10
+Mean accuracy without k-means: 72.75
+Std accuracy without k-means: 0.0
+Mean time without k-means: 16.7309
+Mean accuracy with k-means: 53.0
+Std accuracy with k-means: 0.0
+Mean time with k-means: 1.0364

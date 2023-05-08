@@ -1,6 +1,7 @@
 import pyreadr
 import numpy as np
 from sklearn import utils
+from scipy.ndimage import gaussian_filter
 
 
 def get_img(flatten_img):
@@ -13,6 +14,7 @@ def get_img(flatten_img):
 
 
 def load_unsplitted_data(n_persons=10, shuffle=False):
+
     if n_persons in [1, 4, 10, 12]:
         data = pyreadr.read_r('data/data_{}.Rdata'.format(n_persons))
     else:
@@ -28,7 +30,8 @@ def load_unsplitted_data(n_persons=10, shuffle=False):
     return people, labels, images
 
 
-def load_2d_unsplitted_data(n_persons=10, shuffle=False):
+def load_2d_unsplitted_data(n_persons=10, shuffle=False, gaussian_blur=False):
+
     people, labels, flatten_images = load_unsplitted_data(n_persons, shuffle)
     images = []
     for flatten_img in flatten_images:
@@ -36,11 +39,45 @@ def load_2d_unsplitted_data(n_persons=10, shuffle=False):
         images.append(img)
 
     images = np.asarray(images)
+
+    if gaussian_blur:
+        blurred = []
+        for img in images:
+            img = gaussian_filter(img, sigma=0.5)
+            blurred.append(img)
+        images = np.asarray(blurred)
+
     return people, labels, images
 
 
-def load_all_persons_in_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
-    _, labels, images = load_unsplitted_data(n_persons, shuffle)
+def load_all_persons_in_dataset(n_persons=10,
+                                split_ratio=0.8,
+                                shuffle=False,
+                                gaussian_blur=False,
+                                verbose=False):
+
+    X_train, y_train, X_test, y_test = load_2d_all_persons_in_dataset(
+        n_persons, split_ratio, shuffle, gaussian_blur, verbose=False
+    )
+    X_train = X_train.reshape((X_train.shape[0], 18 * 18))
+    X_test = X_test.reshape((X_test.shape[0], 18 * 18))
+
+    if verbose:
+        print('X_train shape:', X_train.shape)
+        print('y_train shape:', y_train.shape)
+        print('X_test shape:', X_test.shape)
+        print('y_test shape:', y_test.shape)
+
+    return X_train, y_train, X_test, y_test
+
+
+def load_2d_all_persons_in_dataset(n_persons=10,
+                                   split_ratio=0.8,
+                                   shuffle=False,
+                                   gaussian_blur=False,
+                                   verbose=False):
+
+    _, labels, images = load_2d_unsplitted_data(n_persons, shuffle, gaussian_blur)
     n = images.shape[0]
 
     X_train = images[:int(n * split_ratio), :]
@@ -57,44 +94,17 @@ def load_all_persons_in_dataset(n_persons=10, split_ratio=0.8, shuffle=False, ve
     return X_train, y_train, X_test, y_test
 
 
-def load_2d_all_persons_in_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
-    _, labels, images = load_2d_unsplitted_data(n_persons, shuffle)
-    n = images.shape[0]
+def load_disjunct_dataset(n_persons=10,
+                          split_ratio=0.8,
+                          shuffle=False,
+                          gaussian_blur=False,
+                          verbose=False):
 
-    X_train = images[:int(n * split_ratio), :]
-    y_train = labels[:int(n * split_ratio)]
-    X_test = images[int(n * split_ratio):, :]
-    y_test = labels[int(n * split_ratio):]
-
-    if verbose:
-        print('X_train shape:', X_train.shape)
-        print('y_train shape:', y_train.shape)
-        print('X_test shape:', X_test.shape)
-        print('y_test shape:', y_test.shape)
-
-    return X_train, y_train, X_test, y_test
-
-
-def load_disjunct_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
-    people, labels, images = load_unsplitted_data(n_persons, shuffle)
-
-    X_train = []
-    y_train = []
-    X_test = []
-    y_test = []
-
-    for i in range(people.shape[0]):
-        if people[i] in np.arange(int(split_ratio * n_persons)):
-            X_train.append(images[i])
-            y_train.append(labels[i])
-        else:
-            X_test.append(images[i])
-            y_test.append(labels[i])
-
-    X_train = np.array(X_train)
-    y_train = np.array(y_train)
-    X_test = np.array(X_test)
-    y_test = np.array(y_test)
+    X_train, y_train, X_test, y_test = load_2d_disjunct_dataset(
+        n_persons, split_ratio, shuffle, gaussian_blur, verbose=False
+    )
+    X_train = X_train.reshape((X_train.shape[0], 18 * 18))
+    X_test = X_test.reshape((X_test.shape[0], 18 * 18))
 
     if verbose:
         print('X_train shape:', X_train.shape)
@@ -105,8 +115,13 @@ def load_disjunct_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=
     return X_train, y_train, X_test, y_test
 
 
-def load_2d_disjunct_dataset(n_persons=10, split_ratio=0.8, shuffle=False, verbose=False):
-    people, labels, images = load_2d_unsplitted_data(n_persons, shuffle)
+def load_2d_disjunct_dataset(n_persons=10,
+                             split_ratio=0.8,
+                             shuffle=False,
+                             gaussian_blur=False,
+                             verbose=False):
+
+    people, labels, images = load_2d_unsplitted_data(n_persons, shuffle, gaussian_blur)
 
     X_train = []
     y_train = []

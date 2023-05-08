@@ -2,6 +2,7 @@ import pyreadr
 import numpy as np
 from sklearn import utils
 from scipy.ndimage import gaussian_filter
+from skimage.transform import rotate
 
 
 def get_img(flatten_img):
@@ -157,4 +158,75 @@ def cross_validation(images, labels, test_size=0.1):
     y_train = labels[:int((1 - test_size) * n)]
     X_test = images[int((1 - test_size) * n):, :]
     y_test = labels[int((1 - test_size) * n):]
+    return X_train, y_train, X_test, y_test
+
+
+def augment(images, labels, n_times=10, rotation_range=15, shift_range=2):
+    X = []
+    y = []
+    for n in range(n_times):
+        for i in range(images.shape[0]):
+            # Rotation
+            rotated = rotate(images[i], angle=np.random.randint(-rotation_range, rotation_range))
+            # Shift
+            shift_x, shift_y = np.random.randint(-shift_range, shift_range, size=2)
+            shifted = np.roll(np.roll(rotated, shift_x, axis=1), shift_y, axis=0)
+
+            X.append(shifted)
+            y.append(labels[i])
+
+        print('{}% augmented'.format(int((n + 1) / n_times * 100)))
+
+    return np.asarray(X), np.asarray(y)
+
+
+def load_augmented_2d_all_persons_in_dataset(n_persons=12,
+                                       split_ratio=0.9,
+                                       shuffle=False,
+                                       gaussian_blur=False,
+                                       n_times=10,
+                                       rotation_range=15,
+                                       shift_range=2,
+                                       verbose=False):
+
+    X_train, y_train, X_test, y_test = load_2d_all_persons_in_dataset(
+        n_persons, split_ratio, shuffle, gaussian_blur, verbose=False
+    )
+    print('Train dataset augmentation...')
+    X_train, y_train = augment(X_train, y_train, n_times, rotation_range, shift_range)
+    print('Test dataset augmentation...')
+    X_test, y_test = augment(X_test, y_test, n_times, rotation_range, shift_range)
+
+    if verbose:
+        print('X_train shape:', X_train.shape)
+        print('y_train shape:', y_train.shape)
+        print('X_test shape:', X_test.shape)
+        print('y_test shape:', y_test.shape)
+
+    return X_train, y_train, X_test, y_test
+
+
+def load_augmented_2d_disjunct_dataset(n_persons=12,
+                                    split_ratio=0.9,
+                                    shuffle=False,
+                                    gaussian_blur=False,
+                                    n_times=10,
+                                    rotation_range=15,
+                                    shift_range=2,
+                                    verbose=False):
+
+    X_train, y_train, X_test, y_test = load_2d_disjunct_dataset(
+        n_persons, split_ratio, shuffle, gaussian_blur, verbose=True
+    )
+    print('Train dataset augmentation...')
+    X_train, y_train = augment(X_train, y_train, n_times, rotation_range, shift_range)
+    print('Test dataset augmentation...')
+    X_test, y_test = augment(X_test, y_test, n_times, rotation_range, shift_range)
+
+    if verbose:
+        print('X_train shape:', X_train.shape)
+        print('y_train shape:', y_train.shape)
+        print('X_test shape:', X_test.shape)
+        print('y_test shape:', y_test.shape)
+
     return X_train, y_train, X_test, y_test
